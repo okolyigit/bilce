@@ -1,9 +1,8 @@
-# Wordle TR
- Günlük sınır olmadan istediğiniz kadar oynayabileceğiniz Türkçe bir wordle oyunu.
+# TELBİS
+Kelimelerin anlamlarını öğrenmenizi sağlayan bir kelime bulma oyunu 
  
 ### Hemen [**Oynamak**][1] İçin Tıkla!
 
 
 
-[1]: https://mehmetabak.github.io/Wordle-TR/
-
+[1]: [(https://okolyigit.github.io/telbis.github.io/)]
