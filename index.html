@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr" class="html">
+
+<head>
+	
+	<meta name="google-site-verification" content="JfZQShGtCq5YmzKBZPK0fz3YCRmB2mdlf-UlSmunetM" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	  <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="Turkish Wordle Unlimited is a wordle game clone that can be played unlimited times.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <title>Sınırsız Wordle</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=cancel" />
+    
+</head>
+
+<body>
+    <header>
+        
+        <div class="container-fluid">
+            <div class="row border-bottom">
+                <div class="title">
+                    <img src="logo.png" alt="Description of image" width="400px" >
+                    <h1></h1>
+                </div>                
+            </div>
+            
+        <span class= "open" onclick="openNav()">&#9776; 
+        </span> 
+
+        <div class="sidenav" id="sidebarNav"> 
+            <span class="material-symbols-outlined" id= "navclose" onclick="closeNav()"; >
+                close
+                </span>
+            <img src="logo.png" class="title" width="200px">
+              
+            <a href="index.html">Yeni Oyun</a>
+            <a href="javascript:void(0)" class= "Btn" onclick="openinfopopup()">Hakkında</a>
+            <a href="javascript:void(0)" class= "Btn" onclick="openhowtopopup()">Nasıl Oynanır?</a>
+            
+            <a href="javascript:void(0)" class= "Btn" onclick="openteampopup()">Team</a>
+        </div>
+        
+    </header>
+
+<div class="popup" id="infopopup">
+    <span class="material-symbols-outlined" onclick="closeinfopopup()">
+        close
+        </span>
+    <h2>Hakkında</h2>
+    <p>Kelimelerin anlamlarını görebilceğiniz bir kelime bulma oyunu. </p>
+    <p>İyi eğlenceler dileriz.</p>
+</div>
+
+<div class="popup" id="howtopopup">
+    <span class="material-symbols-outlined" onclick="closehowtopopup()">
+        close
+        </span>
+    <h2>Nasıl Oynanır?</h2>
+    <img src="howto.png" alt="Description of image" width="450" >
+
+</div>
+
+<div class="popup" id="teampopup">
+    <span class="material-symbols-outlined" onclick="closeteampopup()">
+        close
+        </span>
+    <h2> Şanlıurfa Bilim ve Sanat Markezi </h2>
+    <h2> Proje 32 </h2>
+</div>
+  
+       
+
+    <div id="game">
+        <div id="board-container" class="container">
+            <div id="board" style="width:350px; height:420px;">
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+                <div class="game-row row">
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                    <div class="game-tile col"></div>
+                </div>
+            </div>
+        </div>
+        <div id="game-keyboard" class="container">
+            <div class="row keyboard-row">
+                <div class="col keyboard-key" id="letter-e">e</div>
+                <div class="col keyboard-key" id="letter-r">r</div>
+                <div class="col keyboard-key" id="letter-t">t</div>
+                <div class="col keyboard-key" id="letter-y">y</div>
+                <div class="col keyboard-key" id="letter-u">u</div>
+                <div class="col keyboard-key" id="letter-noktasizi">ı</div>
+                <div class="col keyboard-key" id="letter-o">o</div>
+                <div class="col keyboard-key" id="letter-p">p</div>
+                <div class="col keyboard-key" id="letter-yumusakg">ğ</div>
+                <div class="col keyboard-key" id="letter-noktaliu">ü</div>
+            </div>
+            <div class="row keyboard-row">
+                <div class="col keyboard-key" id="letter-a">a</div>
+                <div class="col keyboard-key" id="letter-s">s</div>
+                <div class="col keyboard-key" id="letter-d">d</div>
+                <div class="col keyboard-key" id="letter-f">f</div>
+                <div class="col keyboard-key" id="letter-g">g</div>
+                <div class="col keyboard-key" id="letter-h">h</div>
+                <div class="col keyboard-key" id="letter-j">j</div>
+                <div class="col keyboard-key" id="letter-k">k</div>
+                <div class="col keyboard-key" id="letter-l">l</div>
+                <div class="col keyboard-key" id="letter-notaklis">ş</div>
+                <div class="col keyboard-key" id="letter-i">i</div>
+            </div>
+            <div class="row keyboard-row">
+                <div class="col keyboard-key" id="enter-button">enter</div>
+                <div class="col keyboard-key" id="letter-z">z</div>
+                <div class="col keyboard-key" id="letter-c">c</div>
+                <div class="col keyboard-key" id="letter-v">v</div>
+                <div class="col keyboard-key" id="letter-b">b</div>
+                <div class="col keyboard-key" id="letter-n">n</div>
+                <div class="col keyboard-key" id="letter-m">m</div>
+                <div class="col keyboard-key" id="letter-noktalio">ö</div>
+                <div class="col keyboard-key" id="letter-noktalic">ç</div>
+                <div class="col keyboard-key" id="backspace-button"><i class="fas fa-backspace"></i></div>
+            </div>
+
+            <script src="js/script.js"></script>
+
+
+            
+</body>
+</html>
