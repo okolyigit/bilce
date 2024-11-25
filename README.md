@@ -5,4 +5,4 @@ Kelimelerin anlamlarını öğrenmenizi sağlayan bir kelime bulma oyunu
 
 
 
-[1]: [https://okolyigit.github.io/telbis.github.io/]
+[1]:[https://okolyigit.github.io/telbis.github.io/]
