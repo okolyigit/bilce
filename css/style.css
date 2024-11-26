@@ -1,4 +1,6 @@
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #0f110f !important;
 }
 
@@ -52,6 +54,8 @@ body {
 
 
 .popup{
+    display: flex;
+    flex-direction: column;
     width: 500px;
     top: 350px;
     height: 600px;
