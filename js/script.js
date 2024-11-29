@@ -38,12 +38,12 @@ $('.game-tile').css('font-size', ($('.game-row').height()) / 1.6);
 
 //Left SideBar Menu
 function openNav(){
-    document.getElementById("sidebarNav").style.width = "250px";
+    document.getElementById("sidebarNav").style.visibility = "visible";
     
 }
 
 function closeNav(){
-    document.getElementById("sidebarNav").style.width = "0px"; 
+    document.getElementById("sidebarNav").style.visibility = "hidden"; 
     document.getElementById("infopopup").style.visibility = "hidden";
     document.getElementById("howtopopup").style.visibility = "hidden";
     document.getElementById("teampopup").style.visibility = "hidden"; 
@@ -52,9 +52,10 @@ function closeNav(){
 
 function openinfopopup(){
     document.getElementById("infopopup").style.visibility = "visible";
-    document.getElementById("sidebarNav").style.width = "0px";
+    document.getElementById("sidebarNav").style.visibility = "hidden";
     document.getElementById("howtopopup").style.visibility = "hidden";
-    document.getElementById("teampopup").style.visibility = "hidden"; 
+    document.getElementById("teampopup").style.visibility = "hidden";
+
 }
 function closeinfopopup(){
     document.getElementById("infopopup").style.visibility = "hidden";
@@ -63,7 +64,7 @@ function closeinfopopup(){
 
 function openhowtopopup(){
     document.getElementById("howtopopup").style.visibility = "visible";
-    document.getElementById("sidebarNav").style.width = "0px";
+    document.getElementById("sidebarNav").style.visibility = "hidden";
     document.getElementById("infopopup").style.visibility = "hidden";
     document.getElementById("teampopup").style.visibility = "hidden"; 
     
@@ -74,7 +75,7 @@ function closehowtopopup(){
 
 function openteampopup(){
     document.getElementById("teampopup").style.visibility = "visible";
-    document.getElementById("sidebarNav").style.width = "0px";
+    document.getElementById("sidebarNav").style.visibility = "hidden";
     document.getElementById("infopopup").style.visibility = "hidden";
     document.getElementById("howtopopup").style.visibility = "hidden";    
     
