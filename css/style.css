@@ -12,8 +12,8 @@ body {
 
 
 /*align .menu-left to left, .menu-right to right and .title to center*/
-.sidenav { height: 400px; 
-    width: 0px; 
+.sidenav { height: 50%; 
+    width: 250px; 
     position: fixed; 
     top: 100; Left: 10; 
     padding-top: 30px; 
@@ -22,14 +22,16 @@ body {
     transition: 0s; 
     overflow-x: hidden; 
     border-radius: 15px;
-
+    visibility: hidden ;
     }
-.sidenav a { display: block; 
-    text-decoration: none; 
+
+.sidenav a { 
+    display: flex;
+    text-decoration: none;
     font-size: 20px; 
     color: #ffffff; 
     padding: 8px 8px 8px 35px; 
-    transition: 0.5s }
+    transition: 0s }
     
 .sidenav a:hover { 
     color: hsl(0, 0%, 100%);
@@ -56,11 +58,11 @@ body {
 .popup{
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 400px;
     top: 350px;
-    height: 600px;
+    height: 450px;
     background: rgb(44, 44, 44);
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     text-align: center;
     color:rgb(255, 255, 255);
@@ -91,8 +93,11 @@ body {
 
 }
 
-
-
+.logo {
+    margin-left: 0%;
+    margin-bottom: 5%;
+    padding-top: 2%;
+}
 
 .menu-right {
     /*vertically align items inside this div center and horizontally right*/
@@ -105,10 +110,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(255, 255, 255);
+    color: #2bff00;
     /*choose a font with minimal letter spacing*/
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 500;
        
     padding: 20px 20px 20px 20px;
 }
@@ -223,21 +228,6 @@ body {
     }
 }
 
-@media screen and (min-width:0px){
-
-    #wrapper{width:500px; height:150px; margin:auto; background:#00F; color:#fff; font-size:14px; text-align:center; }
-    }
-    
-@media screen and (min-width:1000px){
-    
-    #wrapper{width:960px; height:400px; margin:auto; background:#00F; color:#fff; font-size:18px; }
-    }
-    
-    
-@media screen and (min-width:1300px){
-    
-    #wrapper{width:1100px; height:400px; margin:auto; background:#00F; color:#fff; font-size:24px; }
-    }
 
 
 
