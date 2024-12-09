@@ -142,9 +142,6 @@ function displayWordMeaning() {
         });
 }
 
-function OyunSonuPopup() {    
-    openmeanpopup()
-}
 
 //if any .keyboard-key is clicked, type it's value to the first available .game-tile
 $('.keyboard-key:not(#enter-button, #backspace-button)').click(function() {
@@ -319,7 +316,7 @@ function enter() {
                     window.gameOver = true;
 
                     setTimeout(() => {
-                        OyunSonuPopup() 
+                        openmeanpopup()
                     }, 1000);
 
                 } else {
@@ -359,9 +356,8 @@ function enter() {
                     gameOver = true;
 
 
-
                     setTimeout(() => {
-                        OyunSonuPopup() 
+                        openmeanpopup() 
                     }, 1000);
 
                 }
