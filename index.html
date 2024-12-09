@@ -75,11 +75,25 @@
 <div class="popup" id="teampopup">
     <span class="material-symbols-outlined" onclick="closeteampopup()">
         close
-        </span>
-    <h2> Şanlıurfa Bilim ve Sanat Markezi </h2>
-    <h2> Porje 33 </h2>
+    </span>
+    <div class="logo" id="Team">
+        <h2>Biz Kimiz?</h2>
+        <h3 font-color="#9776"> Şanlıurfa Bilim ve Sanat Merkezi</h3>
+        <h2> </h2>
+    </div>
+    
 </div>
-        
+
+
+<div class="popup" id="meanpopup">
+    <span class="material-symbols-outlined" onclick="closemeanpopup()">close</span>
+    <h2>  </h2>
+    <h2> Kelimenin Anlamı: </h2>
+    <div class="meaning" position="center">
+        <!-- Kelimenin anlamı buraya yazdırılacak -->
+    </div>
+</div>
+
 
 <div id="game">
         <div id="board-container" class="container">
@@ -128,6 +142,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div id="game-keyboard" class="container">
             <div class="row keyboard-row">
                 <div class="col keyboard-key" id="letter-e">e</div>
@@ -155,7 +172,7 @@
                 <div class="col keyboard-key" id="letter-i">i</div>
             </div>
             <div class="row keyboard-row">
-                <div class="col keyboard-key" id="enter-button">enter</div>
+                <div class="col keyboard-key" id="backspace-button"><i class="fas fa-backspace"></i></div>
                 <div class="col keyboard-key" id="letter-z">z</div>
                 <div class="col keyboard-key" id="letter-c">c</div>
                 <div class="col keyboard-key" id="letter-v">v</div>
@@ -164,7 +181,7 @@
                 <div class="col keyboard-key" id="letter-m">m</div>
                 <div class="col keyboard-key" id="letter-noktalio">ö</div>
                 <div class="col keyboard-key" id="letter-noktalic">ç</div>
-                <div class="col keyboard-key" id="backspace-button"><i class="fas fa-backspace"></i></div>
+                <div class="col keyboard-key" id="enter-button">enter</div>
             </div>
 
             <script src="js/script.js"></script>
