@@ -339,19 +339,28 @@ function enter() {
                     window.tries += 1;
 
                     if(tries < 6){
-                        jSuites.notification({
-                            name: 'Üzgünüm',
-                            message: 'Yanlış tahmin!',
-                        })
+                        const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Üzgünüm, yanlış tahmin!';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
                     }
 
                 }
                 if (tries > 5) {
-                    let cevap = 'Kaybettin, ' +'cevap '+ window.wordOfTheSession + ' olacaktı!';
-                    jSuites.notification({
-                        name: 'OYUN BİTTİ',
-                        message: cevap,
-                    })
+                    const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Kaybettin, ' +'cevap '+ window.wordOfTheSession + ' olacaktı!';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
+                   
+                   
                     
                     gameOver = true;
 
@@ -363,10 +372,14 @@ function enter() {
                 }
                 console.log(window.dictionary);
             } else {
-                jSuites.notification({
-                
-                    message: 'Böyle bir kelime yok!',
-                })
+                const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Böyle bir kelime yok.';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
                 $('.game-tile').eq(0 + (tries * 5)).addClass('shake');
                 $('.game-tile').eq(1 + (tries * 5)).addClass('shake');
                 $('.game-tile').eq(2 + (tries * 5)).addClass('shake');
@@ -384,10 +397,14 @@ function enter() {
 
         } else {
 //Add shake animation
-            jSuites.notification({
-                name: '',
-                message: '5 harfli bir kelime giriniz!',
-            })
+                const notification = document.createElement('div');
+                notification.className = 'custom-notification';
+                notification.innerText = '5 harfli bir kelime giriniz.';
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                }, 3000);
         }
     }
 }
