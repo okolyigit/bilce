@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #0f110f !important;
+
 }
 
 .fa-question-circle,
@@ -10,6 +11,13 @@ body {
     width: 24px;
 }
 
+.team {
+    margin-top: 30px;
+    padding-top: 30px;
+    position: center;
+    font-size: 40px;
+
+}
 
 /*align .menu-left to left, .menu-right to right and .title to center*/
 .sidenav { height: 50%; 
@@ -73,7 +81,14 @@ body {
 }
 
 
+.meaning {
 
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #fff;
+    margin: 100px;
+
+}
 .close-btn {
     padding: 20px;
     top: 10px;
@@ -97,6 +112,7 @@ body {
     margin-left: 0%;
     margin-bottom: 5%;
     padding-top: 2%;
+
 }
 
 .menu-right {
@@ -132,7 +148,20 @@ body {
 
 
 /*align #board-container in center vertically and horizontally using translate*/
-
+#kelime-anlami {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4d4d4d;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content; /* İçeriğin genişliği kadar yer kaplar */
+  }
+  
+  
 #board-container {
     display: flex;
     align-items: center;
@@ -150,7 +179,7 @@ body {
     border: 0;
     padding: 0;
     margin: 2px 4px 2px 2px;
-    height: 58px;
+    height: 50px;
     border-radius: 4px;
     cursor: pointer;
     user-select: none;
@@ -186,6 +215,7 @@ body {
 .game-row {
     padding: 3px;
     gap: 3px;
+    height: 90%;
 }
 
 .keyboard-key {
