@@ -84,6 +84,13 @@ function closeteampopup(){
     document.getElementById("teampopup").style.visibility = "hidden";    
 }
 
+function openmeanpopup(){
+    document.getElementById("meanpopup").style.visibility = "visible";
+}
+function closemeanpopup(){
+    document.getElementById("meanpopup").style.visibility = "hidden";  
+
+}
 
 
 //function to get the word list from js/words.json jquery and return it
@@ -108,7 +115,36 @@ function getRandomWord() {
 }
 
 wordOfTheSession = getRandomWord();
+displayWordMeaning(); 
 console.log('wordOfTheSession: ' + wordOfTheSession);
+
+//function to get meaning of the word
+function displayWordMeaning() {
+    const word = window.wordOfTheSession; // Oyun sırasında seçilen kelime
+    fetch('js/meanings.json') // meanings.json dosyasını yükle
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("meanings.json dosyasına erişilemiyor!");
+            }
+            return response.json(); // JSON verisini ayrıştır
+        })
+        .then(data => {
+            const meaning = data[word.toLowerCase()] || "Bu kelimenin anlamı bulunamadı."; // Kelimenin anlamını al
+            const meaningElement = document.querySelector('.meaning'); // HTML'deki meaning sınıfını seç
+            if (meaningElement) {
+                meaningElement.innerHTML = `<strong>${word.toUpperCase()}</strong>: ${meaning}`; // Anlamı yazdır
+            } else {
+                console.error("Meaning sınıfı bulunamadı!");
+            }
+        })
+        .catch(error => {
+            console.error("Anlam yükleme sırasında hata:", error);
+        });
+}
+
+function OyunSonuPopup() {    
+    openmeanpopup()
+}
 
 //if any .keyboard-key is clicked, type it's value to the first available .game-tile
 $('.keyboard-key:not(#enter-button, #backspace-button)').click(function() {
@@ -283,8 +319,8 @@ function enter() {
                     window.gameOver = true;
 
                     setTimeout(() => {
-                        location.reload();
-                    }, 5000);
+                        OyunSonuPopup() 
+                    }, 1000);
 
                 } else {
                     
@@ -322,9 +358,11 @@ function enter() {
                     
                     gameOver = true;
 
+
+
                     setTimeout(() => {
-                        location.reload();
-                    }, 6000);
+                        OyunSonuPopup() 
+                    }, 1000);
 
                 }
                 console.log(window.dictionary);
