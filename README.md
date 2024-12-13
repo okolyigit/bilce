@@ -1,5 +1,5 @@
 # Bilce
- Kelimelerin anlamlarını öğrenmenizi sağlayacak bir kelime oyunu.
+ Kelimelerin anlamlarını öğrenmenizi sağlayacak bir bilmece oyunu.
  
 ### Hemen [**Oynamak**][1] İçin Tıkla!
 
