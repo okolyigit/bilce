@@ -2,19 +2,25 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #0f110f !important;
+
 }
 
+.fa-question-circle,
+.fa-cog {
+    color: #fff;
+    width: 24px;
+}
 
 .team {
     margin-top: 30px;
     padding-top: 30px;
     position: center;
     font-size: 40px;
+
 }
 
 /*align .menu-left to left, .menu-right to right and .title to center*/
-.sidenav { 
-    height: 50%; 
+.sidenav { height: 50%; 
     width: 250px; 
     position: fixed; 
     top: 100; Left: 10; 
@@ -76,6 +82,7 @@ body {
 
 
 .meaning {
+
     font-family: Arial, sans-serif;
     font-size: 16px;
     color: #fff;
@@ -108,6 +115,12 @@ body {
 
 }
 
+.menu-right {
+    /*vertically align items inside this div center and horizontally right*/
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 .title {
     display: flex;
@@ -121,28 +134,43 @@ body {
     padding: 20px 20px 20px 20px;
 }
 
+#help-text,
+#settings-text {
+    color: rgb(184, 184, 184);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 0.9em;
+    letter-spacing: -0.05em;
+    display: none;
+    opacity: 0.5;
+    padding: 5px;
+}
 
+
+#kelime-anlami {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4d4d4d;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content; /* İçeriğin genişliği kadar yer kaplar */
+  }
+  
   
 #board-container {
-    margin-top: 0%;
-    padding-top: -10%;
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 #game-keyboard {
-    display: fixed;
-    position: fixed;
-    bottom: 10px;
-    align-items: center;
-    transform: translate(20%, 0);
-
-    justify-content: center;
-
+    gap: 3px;
+    padding: 10px 
 }
-
 
 .keyboard-key {
     font-family: inherit;
@@ -151,17 +179,17 @@ body {
     padding: 0;
     margin: 2px 4px 2px 2px;
     height: 50px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     user-select: none;
     background-color: #818384;
     color: #ffffff;
     flex: 1;
     display: flex;
+    justify-content: center;
     align-items: center;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
-    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 .custom-notification {
     position: fixed;
@@ -183,7 +211,7 @@ body {
 }
 
 #board {
-    padding: 0px 0px;
+    padding: 0px 13px;
 }
 
 .game-tile {
@@ -202,6 +230,50 @@ body {
     gap: 3px;
     height: 80%;
 }
+
+.keyboard-key {
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media screen and (max-width: 500px) {
+    .keyboard-key {
+        font-size: 0.8em;
+    }
+    h1 {
+        font-size: calc(1.2rem + 1.5vw) !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .keyboard-key {
+        font-size: 0.6em;
+    }
+    h1 {
+        font-size: calc(1rem + 1.5vw) !important;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .keyboard-key {
+        margin: 0 1px 0 0;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .keyboard-key {
+        margin: 0 0.1px 0 0;
+    }
+}
+
+@media screen and (max-width: 347px) {
+    h1 {
+        font-size: calc(0.8rem + 1.5vw) !important;
+    }
+}
+
+
+
+
 
 .game-tile {
     color: #fff;
