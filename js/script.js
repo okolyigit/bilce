@@ -104,13 +104,16 @@ function getWordList() {
     return wordlist;
 }
 
+// Türkçe'ye özel harf dönüşümü fonksiyonları
+
+
 var wordList = getWordList();
 
 //function to get a random word from /js/words.json using jquery and set it to var word
 function getRandomWord() {
     var word = window.wordList;
     //make word lowercase
-    word = word[Math.floor(Math.random() * word.length)].toUpperCase();
+    word = word[Math.floor(Math.random() * word.length)].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
     return word;
 }
 
@@ -129,10 +132,10 @@ function displayWordMeaning() {
             return response.json(); // JSON verisini ayrıştır
         })
         .then(data => {
-            const meaning = data[word.toLowerCase()] || "Bu kelimenin anlamı bulunamadı."; // Kelimenin anlamını al
+            const meaning = data[word.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase()] || "Bu kelimenin anlamı bulunamadı."; // Kelimenin anlamını al
             const meaningElement = document.querySelector('.meaning'); // HTML'deki meaning sınıfını seç
             if (meaningElement) {
-                meaningElement.innerHTML = `<strong>${word.toUpperCase()}</strong>: ${meaning}`; // Anlamı yazdır
+                meaningElement.innerHTML = `<h3><strong>"${word.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase()}"</strong>: ${meaning}</h3>`; // Anlamı yazdır
             } else {
                 console.error("Meaning sınıfı bulunamadı!");
             }
@@ -151,7 +154,7 @@ $('.keyboard-key:not(#enter-button, #backspace-button)').click(function() {
         console.log('typedWord: ' + typedWord);
         key = key.replace(/ı/g, 'I');
         key = key.replace(/i/g, 'İ');
-        key = key.toUpperCase();
+        key = key.replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
         var firstEmpty = $('.game-tile').filter(function() {
             return ($(this).text() === '');
         }).first();
@@ -171,7 +174,7 @@ $(document).keypress(function(e) {
             console.log('typedWord: ' + typedWord);
             key = key.replace(/ı/g, 'I');
             key = key.replace(/i/g, 'İ');
-            key = key.toUpperCase();
+            key = key.replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
             var firstEmpty = $('.game-tile').filter(function() {
                 return ($(this).text() === '');
             }).first();
@@ -211,129 +214,231 @@ var dictionary = {};
 const bool = [null,null,null,null,null];
 
 
-// Türkçe'ye özel harf dönüşümü fonksiyonları
-function turkishToLowerCase(char) {
-    return char.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase();
-}
-
-function turkishToUpperCase(char) {
-    return char.replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
-}
-
 function enter() {
-    if (!window.gameOver) {
-        // Sözlük sıfırlama
-        window.dictionary = {};
-        for (const letter of window.wordOfTheSession) {
-            const upperLetter = turkishToUpperCase(letter);
-            window.dictionary[upperLetter] = (window.dictionary[upperLetter] || 0) + 1;
+    if (window.gameOver === false) {
+        for (var i = 0; i < window.wordOfTheSession.length; i++) {
+            var letter = window.wordOfTheSession[i];
+            window.dictionary[letter] = 0;
+        }
+        for (var i = 0; i < window.wordOfTheSession.length; i++) {
+            var letter = window.wordOfTheSession[i];
+            window.dictionary[letter]++;
         }
         console.log(window.dictionary);
-
         if (window.typedWord.length === 5) {
-            // Girilen kelimenin geçerli olup olmadığını kontrol et
+            //check if typedWord is in wordList
             if (window.wordList.includes(window.typedWord)) {
-                for (let i = 0; i < 5; i++) {
-                    const typedChar = turkishToLowerCase(window.typedWord[i]);
-                    const correctChar = turkishToLowerCase(window.wordOfTheSession[i]);
-                    const upperTypedChar = turkishToUpperCase(window.typedWord[i]);
-
-                    if (typedChar === correctChar) {
+                for (var i = 0; i < 5; i++) {
+                    if (window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase() == window.wordOfTheSession[i]) {
                         $('.game-tile').eq(i + (tries * 5)).css('background-color', 'green');
-                        bool[i] = typedChar;
-                        $('.keyboard-key').filter(function () {
-                            return $(this).text() === typedChar;
+                        bool[i] = window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
+                        $('.keyboard-key').filter(function() {
+                            return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
                         }).css('background-color', 'green');
-                        window.dictionary[upperTypedChar]--;
-                    } else if (window.wordOfTheSession.includes(upperTypedChar) && window.dictionary[upperTypedChar] > 0) {
-                        $('.game-tile').eq(i + (tries * 5)).css('background-color', '#b59f3b');
-                        const key = $('.keyboard-key').filter(function () {
-                            return $(this).text() === typedChar;
-                        });
-                        if (key.css('background-color') !== 'green') {
-                            key.css('background-color', '#b59f3b');
+                        window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()]--;
+
+                        if(window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()] <0){
+                            let ii = window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()]*-1
+                            for(var a = 0; a < i; a++){
+                                var text = $('.game-tile').eq(a + (tries * 5)).first();
+                                if($('.game-tile').eq(a + (tries * 5)).css('background-color') === 'rgb(181, 159, 59)' && text.text() === window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase() && ii > 0){
+                                    $('.game-tile').eq(a + (tries * 5)).css('background-color', '#3a3a3c');
+                                    ii--;
+                                    window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()]++;
+                                }
+                            }
                         }
-                        window.dictionary[upperTypedChar]--;
+                    }
+                    //check if window.typedWord[i] is in wordOfTheSession
+                    else if (window.wordOfTheSession.includes(window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()) && window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()] > 0) {
+                        $('.game-tile').eq(i + (tries * 5)).css('background-color', '#b59f3b');
+                        //if the letter's keyboard key is not green, make it yellow
+                        if ($('.keyboard-key').filter(function() {
+                                return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                            }).css('background-color') !== 'green') {
+                            $('.keyboard-key').filter(function() {
+                                return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                            }).css('background-color', '#b59f3b');
+                            window.dictionary[window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase()]--;
+                            //Last Control
+                            if(bool.includes(window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase())){
+                                $('.keyboard-key').filter(function() {
+                                    return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                                }).css('background-color', 'green');
+                            }else if(window.wordOfTheSession.includes(window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase())){
+                                $('.keyboard-key').filter(function() {
+                                    return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                                }).css('background-color', '#b59f3b');
+                            }
+                        }
                     } else {
                         $('.game-tile').eq(i + (tries * 5)).css('background-color', '#3a3a3c');
-                        const key = $('.keyboard-key').filter(function () {
-                            return $(this).text() === typedChar;
-                        });
-                        if (key.css('background-color') !== 'green' && key.css('background-color') !== '#b59f3b') {
-                            key.css('background-color', '#3a3a3c');
+                        //if the letter's keyboard key is not green or yellow, make it red
+                        if ($('.keyboard-key').filter(function() {
+                            return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                        }).css('background-color') !== 'green' && $('.keyboard-key').filter(function() {
+                            return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                        }).css('background-color') !== '#b59f3b') {
+                            $('.keyboard-key').filter(function() {
+                                return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                            }).css('background-color', '#3a3a3c');
+                            //Last Control
+                            if(bool.includes(window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase())){
+                                $('.keyboard-key').filter(function() {
+                                    return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                                }).css('background-color', 'green');
+                            }else if(window.wordOfTheSession.includes(window.typedWord[i].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase())){
+                                $('.keyboard-key').filter(function() {
+                                    return ($(this).text() === window.typedWord[i].replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase());
+                                }).css('background-color', '#b59f3b');
+                            }
                         }
                     }
                 }
 
-                // Kazanma durumu kontrolü
-                if (turkishToUpperCase(window.typedWord) === window.wordOfTheSession) {
-                    showNotification('Tebrikler, doğru tahmin!');
-                    animateTiles(tries);
+
+                if (window.typedWord.replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase() === window.wordOfTheSession) {
+                    {
+                        const notification = document.createElement('div');
+                            notification.className = 'custom-notification';
+                            notification.innerText = 'Tebrikler, doğru bildin!';
+                            document.body.appendChild(notification);
+    
+                            setTimeout(() => {
+                            notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                            }, 3000);
+                       
+                       
+                        
+                        gameOver = true;
+    
+    
+                        setTimeout(() => {
+                            openmeanpopup() 
+                        }, 1000);
+    
+                    }
+
+                    $('.game-tile').eq(0 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(1 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(2 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(3 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(4 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(4 + (tries * 5)).on('animationend', function() {
+                        $('.game-tile').eq(0 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(1 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(2 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(3 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(4 + (tries * 5))[0].classList.remove('flip-animation');
+                    });
+
                     window.gameOver = true;
-                    setTimeout(openmeanpopup, 1000);
+
+                    setTimeout(() => {
+                        openmeanpopup()
+                    }, 1000);
+
                 } else {
-                    animateTiles(tries);
-                    window.typedWord = '';
+                    
+
+                    $('.game-tile').eq(0 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(1 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(2 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(3 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(4 + (tries * 5)).addClass('flip-animation');
+                    $('.game-tile').eq(4 + (tries * 5)).on('animationend', function() {
+                        $('.game-tile').eq(0 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(1 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(2 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(3 + (tries * 5))[0].classList.remove('flip-animation');
+                        $('.game-tile').eq(4 + (tries * 5))[0].classList.remove('flip-animation');
+                    });
+
+                    typedWord = '';
                     window.tries += 1;
 
-                    if (tries > 5) {
-                        showNotification(`Kaybettin, cevap ${window.wordOfTheSession} olacaktı!`);
-                        window.gameOver = true;
-                        setTimeout(openmeanpopup, 1000);
-                    } else {
-                        showNotification('Üzgünüm, yanlış tahmin!');
+                    if(tries < 6){
+                        const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Üzgünüm, yanlış tahmin!';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
                     }
+
                 }
+                if (tries > 5) {
+                    const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Kaybettin, ' +'cevap '+ window.wordOfTheSession.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase() + ' olacaktı!';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
+                   
+                   
+                    
+                    gameOver = true;
+
+
+                    setTimeout(() => {
+                        openmeanpopup() 
+                    }, 1000);
+
+                }
+                console.log(window.dictionary);
             } else {
-                invalidWordShake();
-                showNotification('Böyle bir kelime yok.');
+                const notification = document.createElement('div');
+                        notification.className = 'custom-notification';
+                        notification.innerText = 'Böyle bir kelime yok.';
+                        document.body.appendChild(notification);
+
+                        setTimeout(() => {
+                        notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                        }, 3000);
+                $('.game-tile').eq(0 + (tries * 5)).addClass('shake');
+                $('.game-tile').eq(1 + (tries * 5)).addClass('shake');
+                $('.game-tile').eq(2 + (tries * 5)).addClass('shake');
+                $('.game-tile').eq(3 + (tries * 5)).addClass('shake');
+                $('.game-tile').eq(4 + (tries * 5)).addClass('shake');
+                setTimeout(() => {
+                    $('.game-tile').eq(0 + (tries * 5))[0].classList.remove('shake');
+                    $('.game-tile').eq(1 + (tries * 5))[0].classList.remove('shake');
+                    $('.game-tile').eq(2 + (tries * 5))[0].classList.remove('shake');
+                    $('.game-tile').eq(3 + (tries * 5))[0].classList.remove('shake');
+                    $('.game-tile').eq(4 + (tries * 5))[0].classList.remove('shake');
+                }, 1000);
             }
+
+
         } else {
-            showNotification('5 harfli bir kelime giriniz.');
+//Add shake animation
+                const notification = document.createElement('div');
+                notification.className = 'custom-notification';
+                notification.innerText = '5 harfli bir kelime giriniz.';
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                notification.remove(); // Bildirimi 3 saniye sonra kaldır
+                }, 3000);
         }
     }
 }
 
-function animateTiles(tries) {
-    for (let i = 0; i < 5; i++) {
-        const tile = $('.game-tile').eq(i + (tries * 5));
-        tile.addClass('flip-animation');
-        tile.on('animationend', function () {
-            tile[0].classList.remove('flip-animation');
-        });
-    }
-}
 
-function invalidWordShake() {
-    for (let i = 0; i < 5; i++) {
-        const tile = $('.game-tile').eq(i + (tries * 5));
-        tile.addClass('shake');
-        setTimeout(() => {
-            tile[0].classList.remove('shake');
-        }, 1000);
-    }
-}
 
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'custom-notification';
-    notification.innerText = message;
-    document.body.appendChild(notification);
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
-
-// Enter tuşu ile çağrı
-$(document).keydown(function (e) {
-    if (e.which === 13 && !gameOver) {
+//if enter is pressed
+$(document).keydown(function(e) {
+    if (e.which === 13 && gameOver === false) {
         enter();
     }
 });
-
-// Enter butonu ile çağrı
-$('#enter-button').click(function () {
-    if (!gameOver) {
+//if #enter-button is clicked
+$('#enter-button').click(function() {
+    if (gameOver === false) {
         enter();
     }
 });
