@@ -170,8 +170,10 @@ body {
 }
 
 #game-keyboard {
-    gap: 30px;
-    padding: 0px
+    margin-top: -10%;
+    padding-top: 5%;
+    padding-bottom: 10%;
+
 }
 
 .keyboard-key {
@@ -232,14 +234,20 @@ body {
     height: 80%;
 }
 
-#game {
-    align-items: flex-start;
-}
 .keyboard-key {
     font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 @media screen and (max-width: 500px) {
+    #board {
+        width: 240px; 
+        height: 300px;
+    }
+    .game-tile {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8em;
+    }
     .keyboard-key {
         font-size: 0.8em;
     }
@@ -249,6 +257,15 @@ body {
 }
 
 @media screen and (max-width: 450px) {
+    #board {
+        width: 240px; 
+        height: 300px;
+    }
+    .game-tile {
+        width: 35px;
+        height: 35px;
+        font-size: 0.7em;
+    }
     .keyboard-key {
         font-size: 0.6em;
     }
@@ -258,18 +275,45 @@ body {
 }
 
 @media screen and (max-width: 420px) {
+    #board {
+        width: 240px; 
+        height: 300px;
+    }
+    .game-tile {
+        width: 30px;
+        height: 30px;
+        font-size: 0.6em;
+    }
     .keyboard-key {
         margin: 0 1px 0 0;
     }
 }
 
 @media screen and (max-width: 385px) {
+    #board {
+        width: 240px; 
+        height: 300px;
+    }
+    .game-tile {
+        width: 25px;
+        height: 25px;
+        font-size: 0.5em;
+    }
     .keyboard-key {
         margin: 0 0.1px 0 0;
     }
 }
 
 @media screen and (max-width: 347px) {
+    #board {
+        width: 240px; 
+        height: 300px;
+    }
+    .game-tile {
+        width: 20px;
+        height: 20px;
+        font-size: 0.4em;
+    }
     h1 {
         font-size: calc(0.8rem + 1.5vw) !important;
     }
