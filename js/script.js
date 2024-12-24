@@ -119,7 +119,6 @@ function getRandomWord() {
 
 wordOfTheSession = getRandomWord();
 displayWordMeaning(); 
-console.log('wordOfTheSession: ' + wordOfTheSession);
 
 //function to get meaning of the word
 function displayWordMeaning() {
