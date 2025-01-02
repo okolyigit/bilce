@@ -104,14 +104,25 @@ function getWordList() {
     return wordlist;
 }
 
+//function to get the word list from js/words.json jquery and return it
+function getProjectWordList() {
+    var wordlist = $.ajax({
+        url: 'js/projectwords.json',
+        dataType: 'json',
+        async: false
+    }).responseText;
+    ProjectWordList = JSON.parse(wordlist);
+    return ProjectWordList;
+}
 // Türkçe'ye özel harf dönüşümü fonksiyonları
 
 
 var wordList = getWordList();
+var ProjectWordList = getProjectWordList();
 
 //function to get a random word from /js/words.json using jquery and set it to var word
 function getRandomWord() {
-    var word = window.wordList;
+    var word = window.ProjectWordList;
     //make word lowercase
     word = word[Math.floor(Math.random() * word.length)].replace(/i/g, 'İ').replace(/ı/g, 'I').toUpperCase();
     return word;
@@ -119,6 +130,7 @@ function getRandomWord() {
 
 wordOfTheSession = getRandomWord();
 displayWordMeaning(); 
+console.log('wordOfTheSession: ' + wordOfTheSession);
 
 //function to get meaning of the word
 function displayWordMeaning() {
@@ -392,7 +404,7 @@ function enter() {
             } else {
                 const notification = document.createElement('div');
                         notification.className = 'custom-notification';
-                        notification.innerText = 'Böyle bir kelime yok.';
+                        notification.innerText = 'Bu kelime sözlüğümüzde yok.';
                         document.body.appendChild(notification);
 
                         setTimeout(() => {
